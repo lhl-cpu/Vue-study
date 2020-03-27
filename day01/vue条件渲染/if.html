@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>用户名：{{ username }}</h1>
+			<h3 v-if="money>10000">用户类型：氪金玩家</h3>
+			<!-- v-if和v-else中间不能有其他的内容 -->
+			<h3 v-else-if="money>5000">用户类型：高级玩家</h3>
+			<h3 v-else>用户类型：屌丝玩家</h3>
+		</div>
+		
+		<script type="text/jscript">
+			 let app = new Vue({
+				 el:"#app",
+				 data:{
+					 username:"奥里给",
+					 money:18,
+				 }
+			 })
+		</script>
+	</body>
+</html>

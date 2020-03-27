@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h4>{{ firstname+lastname }}</h4>
+			<h4>{{ fullname }}</h4>
+			
+			<h4>{{ reverword }}</h4>
+			
+			<h3>年龄奇数学生</h3>
+			<ul>
+				<li v-for="item,key in oddStudents">
+					{{key}}  -- {{ item.name }}  -- {{ item.age }}
+				</li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript">
+			var app = new Vue({
+				el:"#app",
+				data:{
+					firstname:"李",
+					lastname:"四",
+					word:"jiangzhengyangdashabi",
+					students:[
+						{
+							name:"小红",
+							age:20,
+							school:"安阳学院",
+							love:"小黄",
+							imghead:"http://diy.qqjay.com/u/files/2012/0510/d2e10cb3ac49dc63d013cb63ab6ca7cd.jpg"
+						},
+						{
+							name:"小黄",
+							age:21,
+							school:"信阳学院"
+						},
+						{
+							name:"小绿",
+							age:19,
+							school:"郑州学院"
+						},
+						{
+							name:"小黑",
+							age:24,
+							school:"开封学院"
+						}
+					]
+				},
+				computed:{
+					fullname:function(){
+						return this.firstname+this.lastname
+					},
+					reverword:function(){
+						return this.word.split("").reverse().join("")
+					},
+					oddStudents:function(){
+						return this.students.filter(function(item,key){
+							return item.age%2==1
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
