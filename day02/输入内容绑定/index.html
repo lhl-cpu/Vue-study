@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 单行文本绑定 -->
+			<input type="text" v-model="username" value="" />
+			<p>{{username}}</p>
+			<!-- 多行文本绑定 -->
+			<textarea rows="5" cols="10" v-model="username">
+				
+			</textarea>
+			<h3>选择你喜欢的水果</h3>
+			<p v-for="item in food">
+				{{item}}
+				<input type="checkbox" v-model="fooded" :value="item">
+			</p>
+			<h3>{{fooded}}</h3>
+			
+			<h3>选择你最喜欢的水果</h3>
+			<span v-for="item in food">
+				{{item}}
+				<input type="radio" v-model="radiofood" :value="item">
+			</span>
+			<h3>{{radiofood}}</h3>
+			
+			<h3>选择喜欢的城市</h3>
+			<select v-model="chooseCity">
+				<option disabled value ="">请选择</option>
+				<option v-for="item in citys" :value ="item">{{item}}</option>
+			</select>
+			<h3>{{chooseCity}}</h3>
+			
+			<h3>选择居住的城市</h3>
+			<select v-model="moreCity" multiple="multiple">
+				<option v-for="item in citys" :value ="item">{{item}}</option>
+			</select>
+			<h3>{{moreCity}}</h3>
+		</div>
+		<script type="text/javascript">
+			let app = new Vue({
+				el:"#app",
+				data:{
+					username:"小明",
+					food:['苹果','香蕉','火龙果','猕猴桃'],
+					fooded:[],
+					radiofood:"",
+					citys:['北京','上海','广州', '深圳','杭州'],
+					chooseCity:"",
+					moreCity:[],
+				}
+			})
+		</script>
+	</body>
+</html>

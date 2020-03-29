@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<div @click="onParent">
+				<!-- stop修饰符阻止向上冒泡传递， -->
+				<button type="button" @click.stop="onEvent">点击</button>
+			</div>
+			
+			<form action="" method="post" >
+				<input type="text" v-model="city" name="username" @keydown.enter="seachweather"/>
+				<input @click.prevent="seachweather" type="submit" value="提交" />
+			</form>
+			<div id="weather">
+				<h3>{{tmp}}℃  {{cond_txt}}  {{wind_dir}} {{wind_sc}}级</h3>
+			</div>
+			
+			<button type="button" @click.ctrl.exact="onCtrlClick">Ctrl按键</button>
+		</div>
+		
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">	
+			
+			let app = new Vue({
+				el:"#app",
+				data:{
+					city:"开封",
+					tmp:"",
+					cond_txt:"",
+					wind_dir:"",
+					wind_sc:"",
+					},
+				methods:{
+					onEvent:function(){
+						console.log("event")
+					},
+					onParent:function(){
+						console.log("parent")
+					},
+					seachweather:async function(){
+						console.log("查询天气")
+						console.log(this.city)
+						let httpWeather = `https://free-api.heweather.net/s6/weather/now?location=${this.city}&key=736ed6fa962b41019eb5d7e18a88a1d2`
+						let res = await fetch(httpWeather)
+						let resutl = await res.json()
+						console.log(resutl)
+						let now = resutl.HeWeather6[0].now
+						this.tmp = now.tmp
+						this.cond_txt = now.cond_txt
+						this.wind_dir = now.wind_dir
+						this.wind_sc = now.wind_sc
+					},
+					onCtrlClick:function(){
+						console.log("onCtrlClick")
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

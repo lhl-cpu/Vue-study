@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h3>
+				{{ msg }} 
+				<br>
+				{{ reverMsg }}
+			</h3>
+			<ul>
+				<li v-for="item in arr">{{item}}</li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript">
+			let app = new Vue({
+				el:"#app",
+				data:{
+					msg:"hello vue",
+					arr:['小红','小黄','小绿']
+				},
+				computed:{
+					reverMsg:{
+						get:function(){
+							return this.msg.split('').reverse().join('')
+						},
+						set:function(value){
+							this.msg = value.split('').reverse().join('')
+						}
+					}
+				},
+				watch:{
+					msg:function(val){
+						console.log("-----监听msg")
+						console.log(val)
+					},
+					arr:function(val){
+						console.log("-----监听arr")
+						this.msg = val + "被添加了"
+						console.log(val)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
