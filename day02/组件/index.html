@@ -7,13 +7,25 @@
 	</head>
 	<body>
 		<div id="app">
-			
+			<hello-com></hello-com>
 		</div>
 		<script type="text/javascript">
+			let helloCom = Vue.component("hello-com",{
+				template:"<h3>{{msg}}</h3>",
+				data:function(){
+					return {
+						msg:"hello Vue"
+					}
+				}
+			})
+			
 			let app = new Vue({
 				el:"#app",
 				data:{
 					
+				},
+				components:{
+					"hello-com":helloCom
 				}
 			})
 		</script>
